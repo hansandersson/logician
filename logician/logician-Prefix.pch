@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'logician' target in the 'logician' project
+//
+
+#ifdef __OBJC__
+	#import <Foundation/Foundation.h>
+#endif

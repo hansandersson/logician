@@ -1,0 +1,227 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3A41F6E213EAA81700D9CF98 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A41F6E113EAA81700D9CF98 /* Foundation.framework */; };
+		3A41F6E513EAA81700D9CF98 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A41F6E413EAA81700D9CF98 /* main.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3A41F6DB13EAA81700D9CF98 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		3A41F6DD13EAA81700D9CF98 /* logician */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = logician; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A41F6E113EAA81700D9CF98 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		3A41F6E413EAA81700D9CF98 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3A41F6E713EAA81700D9CF98 /* logician-Prefix.pch */ = {isa = PBXFileReference; path = "logician-Prefix.pch"; sourceTree = "<group>"; };
+		3A41F6E813EAA81700D9CF98 /* logician.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = logician.1; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3A41F6DA13EAA81700D9CF98 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A41F6E213EAA81700D9CF98 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3A41F6D213EAA81700D9CF98 = {
+			isa = PBXGroup;
+			children = (
+				3A41F6E313EAA81700D9CF98 /* logician */,
+				3A41F6E013EAA81700D9CF98 /* Frameworks */,
+				3A41F6DE13EAA81700D9CF98 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3A41F6DE13EAA81700D9CF98 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3A41F6DD13EAA81700D9CF98 /* logician */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3A41F6E013EAA81700D9CF98 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3A41F6E113EAA81700D9CF98 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3A41F6E313EAA81700D9CF98 /* logician */ = {
+			isa = PBXGroup;
+			children = (
+				3A41F6E413EAA81700D9CF98 /* main.m */,
+				3A41F6E813EAA81700D9CF98 /* logician.1 */,
+				3A41F6E613EAA81700D9CF98 /* Supporting Files */,
+			);
+			path = logician;
+			sourceTree = "<group>";
+		};
+		3A41F6E613EAA81700D9CF98 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3A41F6E713EAA81700D9CF98 /* logician-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3A41F6DC13EAA81700D9CF98 /* logician */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3A41F6EB13EAA81700D9CF98 /* Build configuration list for PBXNativeTarget "logician" */;
+			buildPhases = (
+				3A41F6D913EAA81700D9CF98 /* Sources */,
+				3A41F6DA13EAA81700D9CF98 /* Frameworks */,
+				3A41F6DB13EAA81700D9CF98 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = logician;
+			productName = logician;
+			productReference = 3A41F6DD13EAA81700D9CF98 /* logician */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3A41F6D413EAA81700D9CF98 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "Ultramentem & Vigorware";
+			};
+			buildConfigurationList = 3A41F6D713EAA81700D9CF98 /* Build configuration list for PBXProject "logician" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 3A41F6D213EAA81700D9CF98;
+			productRefGroup = 3A41F6DE13EAA81700D9CF98 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3A41F6DC13EAA81700D9CF98 /* logician */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3A41F6D913EAA81700D9CF98 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A41F6E513EAA81700D9CF98 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		3A41F6E913EAA81700D9CF98 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		3A41F6EA13EAA81700D9CF98 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		3A41F6EC13EAA81700D9CF98 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "logician/logician-Prefix.pch";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		3A41F6ED13EAA81700D9CF98 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "logician/logician-Prefix.pch";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3A41F6D713EAA81700D9CF98 /* Build configuration list for PBXProject "logician" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A41F6E913EAA81700D9CF98 /* Debug */,
+				3A41F6EA13EAA81700D9CF98 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3A41F6EB13EAA81700D9CF98 /* Build configuration list for PBXNativeTarget "logician" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A41F6EC13EAA81700D9CF98 /* Debug */,
+				3A41F6ED13EAA81700D9CF98 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3A41F6D413EAA81700D9CF98 /* Project object */;
+}
