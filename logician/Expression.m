@@ -36,6 +36,11 @@
 	return YES;
 }
 
+- (BOOL)isEqualTo:(id)object
+{
+	return [object isKindOfClass:[self class]] && [[object description] isEqualToString:[self description]];
+}
+
 - (NSString *)description
 {
 	return [NSString string];

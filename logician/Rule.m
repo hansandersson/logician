@@ -9,7 +9,7 @@
 #import "Rule.h"
 
 @interface Rule (Private)
-+ (NSSet *)deductionsWithGivens:(NSSet *)givens premises:(NSSet *)premises constraints:(NSMutableDictionary *)constraints conclusion:(Expression *)conclusion;
++ (NSSet *)deductionsWithGivens:(NSSet *)givens substrates:(NSSet *)substrates substitutions:(NSSet *)substitutions constraints:(NSMutableDictionary *)constraints;
 @end
 
 @implementation Rule
@@ -44,12 +44,12 @@
 
 - (NSSet *)deductionsWithGivens:(NSSet *)givens
 {
-	return [[self class] deductionsWithGivens:givens premises:substrates constraints:[NSDictionary dictionary] conclusion:nil];
+	return [[self class] deductionsWithGivens:givens substrates:substrates substitutions:substitutions constraints:[NSDictionary dictionary]];
 }
 
-+ (NSSet *)deductionsWithGivens:(NSSet *)givens premises:(NSSet *)premises constraints:(NSMutableDictionary *)constraints conclusion:(Expression *)conclusion
++ (NSSet *)deductionsWithGivens:(NSSet *)givens substrates:(NSSet *)substrates substitutions:(NSSet *)substitutions constraints:(NSMutableDictionary *)constraints
 {
-	if ([conclusion isBound])
+	/*if ([conclusion isBound])
 	{
 		BOOL isConclusionJustified = YES;
 		for (Expression *premise in premises)
@@ -64,16 +64,21 @@
 		{
 			return [NSMutableSet setWithObject:conclusion];
 		}
-	}
+	}*/
 	
 	NSMutableSet *deductions = [NSMutableSet set];
 	
-	for (Expression *premiseMaster in premises)
+	if ([substitutions count] == 0 || [substrates count] == 0)
+	{
+		return deductions;
+	}
+	
+	for (Expression *substrate in substrates)
 	{
 		for (Expression *given in givens)
 		{
 			NSMutableDictionary *constraintsModified = [[constraints mutableCopy] autorelease];
-			NSDictionary *constraintsAddition = [premiseMaster dictionaryMappingTo:given];
+			NSDictionary *constraintsAddition = [substrate dictionaryMappingTo:given];
 			BOOL areConstraintsConsistent = !!constraintsAddition;
 			
 			for (id key in [constraintsAddition allKeys])
@@ -91,12 +96,31 @@
 			
 			if (areConstraintsConsistent)
 			{
-				NSMutableSet *premisesModified = [NSMutableSet setWithCapacity:[premises count]];
-				for (Expression *premiseSlave in premises)
+				NSMutableSet *substratesModified = [NSMutableSet setWithCapacity:[substrates count]];
+				for (Expression *substrateModifiable in substrates)
 				{
-					[premisesModified addObject:[premiseSlave expressionMappedFrom:constraints]];
+					Expression *substrateModified = [substrateModifiable expressionMappedFrom:constraintsModified];
+					if (![substrateModified isBound])
+					{
+						[substratesModified addObject:[substrateModifiable expressionMappedFrom:constraintsModified]];
+					}
 				}
-				[deductions unionSet:[self deductionsWithGivens:givens premises:premisesModified constraints:constraintsModified conclusion:conclusion]];
+				
+				NSMutableSet *substitutionsModified = [NSMutableSet setWithCapacity:[substitutions count]];
+				for (Expression *substitutionModifiable in substitutions)
+				{
+					Expression *substitutionModified = [substitutionModifiable expressionMappedFrom:constraintsModified];
+					if (![substitutionModified isBound])
+					{
+						[substitutionsModified addObject:substitutionModified];
+					}
+					else
+					{
+						[deductions addObject:substitutionModified];
+					}
+				}
+				
+				[deductions unionSet:[self deductionsWithGivens:givens substrates:substratesModified substitutions:substitutionsModified constraints:constraintsModified]];
 			}
 		}
 	}

@@ -15,4 +15,6 @@
 
 - (BOOL)isBound;
 
+- (BOOL)isEqualTo:(id)object;
+
 @end

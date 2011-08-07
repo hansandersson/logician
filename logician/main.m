@@ -10,55 +10,108 @@
 #import "Parser.h"
 #import "Rule.h"
 
-int main (int argc, const char * argv[])
+void parseLine(NSString *line, NSMutableSet *premises, NSMutableSet *conclusions);
+
+int main (const int argc, const char *argv[])
 {	
-	(void) argc;
-	(void) argv;
-	
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	
+	//Get premises
 	NSMutableSet *premises = [NSMutableSet set];
+	NSMutableSet *conclusions = [NSMutableSet set];
 	
-	for (NSString *inputString = nil; !inputString || [inputString length] > 0; )
+	NSAutoreleasePool *filesPool = [[NSAutoreleasePool alloc] init];
+	for (int a = 1; a < argc; a++)
 	{
-		printf("∾ ");
-		inputString = [[[[NSMutableString alloc] initWithData:[[NSFileHandle fileHandleWithStandardInput] availableData] encoding:NSUTF8StringEncoding] autorelease] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-		
-		NSAutoreleasePool *localPool = [[NSAutoreleasePool alloc] init];
-		for (NSString *statementString in [inputString componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"."]])
+		NSString *filePath = [NSString stringWithCString:argv[a] encoding:NSUTF8StringEncoding];
+		NSFileHandle *fileHandle = [NSFileHandle fileHandleForReadingAtPath:filePath];
+		if (fileHandle)
 		{
-			if (![statementString isEqualToString:@""])
+			NSString *fileContents = [[NSString alloc] initWithData:[fileHandle readDataToEndOfFile] encoding:NSUTF8StringEncoding];
+			NSArray *lines = [fileContents componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+			
+			for (NSString *line in lines)
 			{
-				Parser *parser = [[Parser alloc] init];
-				
-				NSArray *statementComponents = [statementString componentsSeparatedByString:@":"];
-				
-				NSSet *expressions = [parser expressionsWithString:[statementComponents objectAtIndex:0]];
-				
-				if ([statementComponents count] == 2)
-				{
-					NSSet *conclusions = [parser expressionsWithString:[statementComponents objectAtIndex:1]];
-					
-					Rule *rule = [[[Rule alloc] initWithSubstrates:expressions substitions:conclusions] autorelease];
-					[premises addObject:rule];
-					printf("  %s\n", [[rule description] cStringUsingEncoding:NSUTF8StringEncoding]);
-				}
-				else
-				{
-					[premises unionSet:expressions];
-					for (Expression *expression in expressions)
-					{
-						printf("  %s\n", [[expression description] cStringUsingEncoding:NSUTF8StringEncoding]);
-					}
-				}
-				
-				[parser release];
+				parseLine(line, premises, conclusions);
 			}
+			
+			[fileContents release];
 		}
-		[localPool drain];
+	}
+	[filesPool drain];
+	
+	for (Expression *premise in premises)
+	{
+		printf(". %s\n", [[premise description] cStringUsingEncoding:NSUTF8StringEncoding]);
+	}
+	
+	for (Expression *conclusion in conclusions)
+	{
+		printf("? %s\n", [[conclusion description] cStringUsingEncoding:NSUTF8StringEncoding]);
+	}
+	
+	for (NSString *inputString = nil;
+		 !inputString || [inputString length] > 0;
+		 printf("∾ "), inputString = [[[[NSMutableString alloc] initWithData:[[NSFileHandle fileHandleWithStandardInput] availableData] encoding:NSUTF8StringEncoding] autorelease] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]])
+	{
+		parseLine(inputString, premises, conclusions);
+	}
+	
+	NSSet *rules = [premises filteredSetUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings)
+														{
+															(void) bindings;
+															return [evaluatedObject isKindOfClass:[Rule class]];
+														}
+														]
+					];
+	
+	NSSet *facts = [premises filteredSetUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings)
+														{
+															(void) bindings;
+															return [evaluatedObject isKindOfClass:[Expression class]];
+														}
+														]
+					];
+	
+	NSMutableSet *deductions = [NSMutableSet set];
+	for (Rule *rule in rules)
+	{
+		[deductions unionSet:[rule deductionsWithGivens:facts]];
+	}
+	
+	for (Expression *deduction in deductions)
+	{
+		printf(", %s\n", [[deduction description] cStringUsingEncoding:NSUTF8StringEncoding]);
 	}
 	
 	[pool drain];
     return 0;
 }
 
+void parseLine(NSString *line, NSMutableSet *premises, NSMutableSet *conclusions)
+{
+	NSAutoreleasePool *linePool = [[NSAutoreleasePool alloc] init];
+	if ([line length] > 0)
+	{
+		Parser *lineParser = [[Parser alloc] init];
+		
+		NSString *directive = [line substringToIndex:1];
+		NSString *statement = [line substringFromIndex:1];
+		
+		if ([directive isEqualToString:@"."])
+		{
+			[premises unionSet:[lineParser expressionsWithString:statement]];
+		}
+		else if ([directive isEqualToString:@"?"])
+		{
+			[conclusions unionSet:[lineParser expressionsWithString:statement]];
+		}
+		else if (![directive isEqualToString:@"\""])
+		{
+			[premises unionSet:[lineParser expressionsWithString:line]];
+		}
+		
+		[lineParser release];
+	}
+	[linePool drain];
+}
