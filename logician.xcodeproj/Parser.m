@@ -15,7 +15,6 @@
 	if ((self = [super init]))
 	{
 		variablesByStringValue = [[NSMutableDictionary alloc] init];
-		parsePosition = 0;
 	}
 	return self;
 }
@@ -23,16 +22,8 @@
 - (void)dealloc
 {
 	[variablesByStringValue release];
+	[remainderString release];
 	[super dealloc];
-}
-
-+ (NSFileHandle *)sharedInputHandle
-{
-	if (!sharedInputHandle)
-	{
-		sharedInputHandle = [[NSFileHandle fileHandleWithStandardInput] retain];
-	}
-	return sharedInputHandle;
 }
 
 + (LogicianParserInputMode)inputModeForString:(NSString *)string
@@ -61,21 +52,34 @@
 	return LogicianParserInputModeInvalid;
 }
 
+- (NSSet *)expressionsWithString:(NSString *)remainderStringNew
+{
+	[remainderString autorelease];
+	remainderString = [[remainderStringNew stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] retain];
+	
+	NSMutableSet *expressions = [NSMutableSet set];
+	while ([remainderString length] > 0)
+	{
+		Expression *expression = [self expressionWithString:remainderString];
+		[expressions addObject:expression];
+	}
+	
+	return expressions;
+}
+
 
 //returns nil if no data present
 //returns variables for numeric input
 //returns constants for alphabetic input
 //returns sentences for nested inputs
-- (Expression *)expressionWithString:(NSString *)sourceString
+- (Expression *)expressionWithString:(NSString *)remainderStringNew
 {
-	while (!carryoverCharacter || [[self class] inputModeForString:carryoverCharacter] == LogicianParserInputModeTermBreak)
+	[remainderString autorelease];
+	remainderString = [[remainderStringNew stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] retain];
+	
+	if (!remainderString || [remainderString length] == 0)
 	{
-		if ([[[[self class] sharedInputHandle] availableData] length] == 0)
-		{
-			return nil;
-		}
-		
-		carryoverCharacter = [[[NSString alloc] initWithData:[[[self class] sharedInputHandle] readDataOfLength:1] encoding:NSUTF8StringEncoding] autorelease];
+		return nil;
 	}
 	
 	//we now have the first sensible character
@@ -84,56 +88,70 @@
 	
 	NSMutableString *workingString = [NSMutableString string];
 	
-	while ((inputMode == LogicianParserInputModeExpression) || ([[self class] inputModeForString:carryoverCharacter] == inputMode))
+	for (NSString *character = [remainderString substringToIndex:1];
+		 (inputMode == LogicianParserInputModeExpression) || ([[self class] inputModeForString:character] == inputMode);
+		 inputMode = [[self class] inputModeForString:character], character = [remainderString substringToIndex:1])
 	{
-		switch ([[self class] inputModeForString:carryoverCharacter])
+		[remainderString autorelease];
+		remainderString = [[remainderString substringFromIndex:1] retain];
+		
+		switch ([[self class] inputModeForString:character])
 		{
 			case LogicianParserInputModeSentenceClose:
+			{
 				return nil;
+			}
 				
 			case LogicianParserInputModeSentence:
 			{
 				NSMutableArray *expressions = [NSMutableArray array];
-				Expression *nextExpression;
-				for (Parser *subparser = [[Parser alloc] init];
-					 (nextExpression = [subparser expressionWithInteractiveInput]);
-					 [expressions addObject:nextExpression], [subparser release], subparser = [[Parser alloc] init]);
+				for (Expression *nextExpression;
+					 (nextExpression = [self expressionWithString:remainderString]);
+					 [expressions addObject:nextExpression]);
+				
 				return [[[Sentence alloc] initWithExpressions:expressions] autorelease];
 			}
 			
 			case LogicianParserInputModeConstant:
 			case LogicianParserInputModeVariable:
 			{
-				[workingString appendString:carryoverCharacter];
+				[workingString appendString:character];
 			}	break;
 			
 			default: break;
 		}
 		
-		if ([[[[self class] sharedInputHandle] availableData] length] > 0)
-		{
-			carryoverCharacter = [[[NSString alloc] initWithData:[[[self class] sharedInputHandle] readDataOfLength:1] encoding:NSUTF8StringEncoding] autorelease];
-		}
-		else
+		if ([remainderString length] == 0)
 		{
 			break;
 		}
 	}
 	
-	switch ([[self class] inputModeForString:carryoverCharacter])
+	switch ([[self class] inputModeForString:workingString])
 	{
 		case LogicianParserInputModeConstant:
+		{
 			return [Constant constantWithStringValue:workingString];
+		}
 		
 		case LogicianParserInputModeVariable:
 			if (![variablesByStringValue objectForKey:workingString])
 			{
 				[variablesByStringValue setObject:[[[Variable alloc] initWithStringValue:[NSString stringWithFormat:@"%i", [variablesByStringValue count]]] autorelease] forKey:workingString];
 			}
+			
 			return [variablesByStringValue objectForKey:workingString];
 		
-		default: return nil;
+		default:
+		{
+			return nil;
+		}
 	}
+}
+
+- (NSString *)remainderString
+{
+	return remainderString;
 }
 
 @end

@@ -22,18 +22,17 @@ typedef enum
 	LogicianParserInputModeSentenceClose = 5
 } LogicianParserInputMode;
 
-NSFileHandle *sharedInputHandle;
-
 @interface Parser : NSObject
 {
-	LogicianParserInputMode currentInputMode;
+	NSString *remainderString;
 	NSMutableDictionary *variablesByStringValue;
-	NSUInteger *parsePosition;
 }
 
-+ (NSFileHandle *)sharedInputHandle;
 + (LogicianParserInputMode)inputModeForString:(NSString *)string;
 
-- (Expression *)expressionWithInteractiveInput;
+- (Expression *)expressionWithString:(NSString *)string;
+- (NSSet *)expressionsWithString:(NSString *)string;
+
+- (NSString *)remainderString;
 
 @end

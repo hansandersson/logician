@@ -50,7 +50,7 @@
 	return NO;
 }
 
-- (NSString *)stringValue
+- (NSString *)description
 {
 	return stringValue;
 }

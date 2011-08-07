@@ -15,6 +15,4 @@
 
 - (BOOL)isBound;
 
-- (NSString *)stringValue;
-
 @end

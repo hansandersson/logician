@@ -45,7 +45,7 @@
 	return self;
 }
 
-- (NSString *)stringValue
+- (NSString *)description
 {
 	return stringValue;
 }

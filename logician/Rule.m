@@ -9,7 +9,7 @@
 #import "Rule.h"
 
 @interface Rule (Private)
-+ (NSSet *)deductionsWithGivens:(NSSet *)givens premises:(NSSet *)premises constraints:(NSDictionary *)constraints;
++ (NSSet *)deductionsWithGivens:(NSSet *)givens premises:(NSSet *)premises constraints:(NSMutableDictionary *)constraints conclusion:(Expression *)conclusion;
 @end
 
 @implementation Rule
@@ -19,35 +19,35 @@
     return nil;
 }
 
-- (id)initWithPremises:(NSSet *)initPremises conclusion:(Expression *)initConclusion
+- (id)initWithSubstrates:(NSSet *)initSubstrates substitions:(NSSet *)initSubstitutions
 {
-	if (!initPremises || !initConclusion) return nil;
+	if (!initSubstrates || !initSubstitutions) return nil;
 	
 	if ((self = [super init]))
 	{
-		premises = [initPremises copy];
-		conclusion = [conclusion retain];
+		substrates = [initSubstrates copy];
+		substitutions = [initSubstitutions retain];
 	}
 	
 	return self;
 }
 
-- (NSSet *)premises
+- (NSSet *)substrates
 {
-	return premises;
+	return substrates;
 }
 
-- (Expression *)conclusion
+- (NSSet *)substitutions
 {
-	return conclusion;
+	return substitutions;
 }
 
 - (NSSet *)deductionsWithGivens:(NSSet *)givens
 {
-	return [[self class] deductionsWithGivens:givens premises:premises constraints:[NSDictionary dictionary]];
+	return [[self class] deductionsWithGivens:givens premises:substrates constraints:[NSDictionary dictionary] conclusion:nil];
 }
 
-+ (NSSet *)deductionsWithGivens:(NSSet *)givens premises:(NSSet *)premises constraints:(NSMutableDictionary *)constraints towardConclusion:(Expression *)conclusion
++ (NSSet *)deductionsWithGivens:(NSSet *)givens premises:(NSSet *)premises constraints:(NSMutableDictionary *)constraints conclusion:(Expression *)conclusion
 {
 	if ([conclusion isBound])
 	{
@@ -96,7 +96,7 @@
 				{
 					[premisesModified addObject:[premiseSlave expressionMappedFrom:constraints]];
 				}
-				[deductions unionSet:[self deductionsWithGivens:givens premises:premisesModified constraints:constraintsModified]];
+				[deductions unionSet:[self deductionsWithGivens:givens premises:premisesModified constraints:constraintsModified conclusion:conclusion]];
 			}
 		}
 	}
@@ -104,10 +104,27 @@
 	return deductions;
 }
 
+- (NSString *)description
+{
+	NSMutableArray *substrateDescriptions = [NSMutableArray arrayWithCapacity:[substrates count]];
+	for (Expression *substrate in substrates)
+	{
+		[substrateDescriptions addObject:[substrate description]];
+	}
+	
+	NSMutableArray *substitutionDescriptions = [NSMutableArray arrayWithCapacity:[substitutions count]];
+	for (Expression *substitution in substitutions)
+	{
+		[substitutionDescriptions addObject:[substitution description]];
+	}
+	
+	return [NSString stringWithFormat:@"%@ : %@", [substrateDescriptions componentsJoinedByString:@" "], [substitutionDescriptions componentsJoinedByString:@" "]];
+}
+
 - (void)dealloc
 {
-	[premises release];
-	[conclusion release];
+	[substrates release];
+	[substitutions release];
     [super dealloc];
 }
 

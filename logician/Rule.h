@@ -11,15 +11,17 @@
 
 @interface Rule : NSObject
 {
-    NSSet *premises;
-	Expression *conclusion;
+    NSSet *substrates;
+	NSSet *substitutions;
 }
 
-- (id)initWithPremises:(NSSet *)initPremises conclusion:(Expression *)conclusion;
+- (id)initWithSubstrates:(NSSet *)initPremises substitions:(NSSet *)deductions;
 
-- (NSSet *)premises;
-- (Expression *)conclusion;
+- (NSSet *)substrates;
+- (NSSet *)substitutions;
 
 - (NSSet *)deductionsWithGivens:(NSSet *)givens;
+
+- (NSString *)description;
 
 @end

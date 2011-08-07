@@ -11,11 +11,6 @@
 
 @implementation Expression
 
-- (id)init
-{
-	return nil;
-}
-
 - (Expression *)expressionMappedFrom:(NSDictionary *)map
 {
 	if (!map)
@@ -41,7 +36,7 @@
 	return YES;
 }
 
-- (NSString *)stringValue
+- (NSString *)description
 {
 	return [NSString string];
 }

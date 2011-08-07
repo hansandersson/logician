@@ -93,15 +93,15 @@
 	return YES;
 }
 
-- (NSString *)stringValue
+- (NSString *)description
 {
-	NSMutableArray *expressionStringValues = [NSMutableArray arrayWithCapacity:[expressions count]];
+	NSMutableArray *expressionDescriptions = [NSMutableArray arrayWithCapacity:[expressions count]];
 	for (Expression *expression in expressions)
 	{
-		[expressionStringValues addObject:[expression stringValue]];
+		[expressionDescriptions addObject:[expression description]];
 	}
 	
-	return [NSString stringWithFormat:@"[ %@ ]", [expressionStringValues componentsJoinedByString:@" "]];
+	return [NSString stringWithFormat:@"[%@]", [expressionDescriptions componentsJoinedByString:@" "]];
 }
 
 - (void)dealloc
