@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Parser.h"
 
 int main (int argc, const char * argv[])
 {	
@@ -23,7 +24,17 @@ int main (int argc, const char * argv[])
 	
 	NSArray *lines = [fileContents componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];*/
 	
-	NSLog(@"%@", [[NSString alloc] initWithData:[[NSFileHandle fileHandleWithStandardInput] availableData] encoding:NSUTF8StringEncoding]);
+	while (true)
+	{
+		Parser *parser = [[Parser alloc] init];
+		if ([[Parser sharedInputHandle] availableData])
+		{
+			Expression *expression = [parser expressionWithInteractiveInput];
+			NSLog(@"%@", [expression stringValue]);
+			[expression release];
+		}
+		[parser release];
+	}
 
 	[pool drain];
     return 0;

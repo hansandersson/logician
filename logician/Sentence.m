@@ -98,9 +98,10 @@
 	NSMutableArray *expressionStringValues = [NSMutableArray arrayWithCapacity:[expressions count]];
 	for (Expression *expression in expressions)
 	{
-		if (
+		[expressionStringValues addObject:[expression stringValue]];
 	}
 	
+	return [NSString stringWithFormat:@"[ %@ ]", [expressionStringValues componentsJoinedByString:@" "]];
 }
 
 - (void)dealloc

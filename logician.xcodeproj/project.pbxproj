@@ -16,7 +16,7 @@
 		3A41F70413EB117100D9CF98 /* Variable.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A41F70313EB117100D9CF98 /* Variable.m */; };
 		3A41F70813EB126100D9CF98 /* Constant.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A41F70713EB126100D9CF98 /* Constant.m */; };
 		3A479C7513EB2468002FA5D4 /* Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A479C7413EB2468002FA5D4 /* Placeholder.m */; };
-		3AE6F21813EC55CA00C56C5E /* Console.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE6F21713EC55CA00C56C5E /* Console.m */; };
+		3AE6F21813EC55CA00C56C5E /* Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE6F21713EC55CA00C56C5E /* Parser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -51,8 +51,8 @@
 		3A41F70713EB126100D9CF98 /* Constant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constant.m; sourceTree = "<group>"; };
 		3A479C7313EB2468002FA5D4 /* Placeholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Placeholder.h; sourceTree = "<group>"; };
 		3A479C7413EB2468002FA5D4 /* Placeholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Placeholder.m; sourceTree = "<group>"; };
-		3AE6F21613EC55CA00C56C5E /* Console.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Console.h; path = logician.xcodeproj/Console.h; sourceTree = SOURCE_ROOT; };
-		3AE6F21713EC55CA00C56C5E /* Console.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Console.m; path = logician.xcodeproj/Console.m; sourceTree = SOURCE_ROOT; };
+		3AE6F21613EC55CA00C56C5E /* Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; name = Parser.h; path = logician.xcodeproj/Parser.h; sourceTree = SOURCE_ROOT; };
+		3AE6F21713EC55CA00C56C5E /* Parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Parser.m; path = logician.xcodeproj/Parser.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,8 +96,8 @@
 			isa = PBXGroup;
 			children = (
 				3A41F6E413EAA81700D9CF98 /* main.m */,
-				3AE6F21613EC55CA00C56C5E /* Console.h */,
-				3AE6F21713EC55CA00C56C5E /* Console.m */,
+				3AE6F21613EC55CA00C56C5E /* Parser.h */,
+				3AE6F21713EC55CA00C56C5E /* Parser.m */,
 				3A41F70913EB127200D9CF98 /* Expressing */,
 				3A479C6F13EB231D002FA5D4 /* Matching */,
 				3A41F6F413EAF2C700D9CF98 /* Fitch.h */,
@@ -200,7 +200,7 @@
 				3A41F70413EB117100D9CF98 /* Variable.m in Sources */,
 				3A41F70813EB126100D9CF98 /* Constant.m in Sources */,
 				3A479C7513EB2468002FA5D4 /* Placeholder.m in Sources */,
-				3AE6F21813EC55CA00C56C5E /* Console.m in Sources */,
+				3AE6F21813EC55CA00C56C5E /* Parser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

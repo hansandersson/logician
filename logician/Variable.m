@@ -52,7 +52,7 @@
 
 - (NSString *)stringValue
 {
-	return @"$";
+	return stringValue;
 }
 
 @end
