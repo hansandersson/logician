@@ -9,12 +9,21 @@
 #import <Foundation/Foundation.h>
 
 int main (int argc, const char * argv[])
-{
+{	
+	(void) argc;
+	(void) argv;
+	//NSScanner
+	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
-	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-
-	// insert code here...
-	NSLog(@"Hello, World!");
+	/*NSString *filePath = [NSString stringWithUTF8String:argv[1]];
+	
+	NSError *error = nil;
+	NSString *fileContents = [NSString stringWithContentsOfFile:filePath usedEncoding:nil error:&error];
+	if (error) NSLog(@"%@", error);
+	
+	NSArray *lines = [fileContents componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];*/
+	
+	NSLog(@"%@", [[NSString alloc] initWithData:[[NSFileHandle fileHandleWithStandardInput] availableData] encoding:NSUTF8StringEncoding]);
 
 	[pool drain];
     return 0;

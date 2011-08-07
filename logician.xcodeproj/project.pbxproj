@@ -9,6 +9,14 @@
 /* Begin PBXBuildFile section */
 		3A41F6E213EAA81700D9CF98 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A41F6E113EAA81700D9CF98 /* Foundation.framework */; };
 		3A41F6E513EAA81700D9CF98 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A41F6E413EAA81700D9CF98 /* main.m */; };
+		3A41F6F013EAE45500D9CF98 /* Expression.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A41F6EF13EAE45500D9CF98 /* Expression.m */; };
+		3A41F6F313EAE77F00D9CF98 /* Sentence.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A41F6F213EAE77F00D9CF98 /* Sentence.m */; };
+		3A41F6F613EAF2C700D9CF98 /* Fitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A41F6F513EAF2C700D9CF98 /* Fitch.m */; };
+		3A41F6F913EB046100D9CF98 /* Rule.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A41F6F813EB046100D9CF98 /* Rule.m */; };
+		3A41F70413EB117100D9CF98 /* Variable.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A41F70313EB117100D9CF98 /* Variable.m */; };
+		3A41F70813EB126100D9CF98 /* Constant.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A41F70713EB126100D9CF98 /* Constant.m */; };
+		3A479C7513EB2468002FA5D4 /* Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A479C7413EB2468002FA5D4 /* Placeholder.m */; };
+		3AE6F21813EC55CA00C56C5E /* Console.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE6F21713EC55CA00C56C5E /* Console.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,8 +35,24 @@
 		3A41F6DD13EAA81700D9CF98 /* logician */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = logician; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A41F6E113EAA81700D9CF98 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3A41F6E413EAA81700D9CF98 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		3A41F6E713EAA81700D9CF98 /* logician-Prefix.pch */ = {isa = PBXFileReference; path = "logician-Prefix.pch"; sourceTree = "<group>"; };
+		3A41F6E713EAA81700D9CF98 /* logician-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "logician-Prefix.pch"; sourceTree = "<group>"; };
 		3A41F6E813EAA81700D9CF98 /* logician.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = logician.1; sourceTree = "<group>"; };
+		3A41F6EE13EAE45500D9CF98 /* Expression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Expression.h; sourceTree = "<group>"; };
+		3A41F6EF13EAE45500D9CF98 /* Expression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Expression.m; sourceTree = "<group>"; };
+		3A41F6F113EAE77F00D9CF98 /* Sentence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sentence.h; sourceTree = "<group>"; };
+		3A41F6F213EAE77F00D9CF98 /* Sentence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sentence.m; sourceTree = "<group>"; };
+		3A41F6F413EAF2C700D9CF98 /* Fitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fitch.h; sourceTree = "<group>"; };
+		3A41F6F513EAF2C700D9CF98 /* Fitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fitch.m; sourceTree = "<group>"; };
+		3A41F6F713EB046100D9CF98 /* Rule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rule.h; sourceTree = "<group>"; };
+		3A41F6F813EB046100D9CF98 /* Rule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rule.m; sourceTree = "<group>"; };
+		3A41F70213EB117100D9CF98 /* Variable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Variable.h; sourceTree = "<group>"; };
+		3A41F70313EB117100D9CF98 /* Variable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Variable.m; sourceTree = "<group>"; };
+		3A41F70613EB126100D9CF98 /* Constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
+		3A41F70713EB126100D9CF98 /* Constant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constant.m; sourceTree = "<group>"; };
+		3A479C7313EB2468002FA5D4 /* Placeholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Placeholder.h; sourceTree = "<group>"; };
+		3A479C7413EB2468002FA5D4 /* Placeholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Placeholder.m; sourceTree = "<group>"; };
+		3AE6F21613EC55CA00C56C5E /* Console.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Console.h; path = logician.xcodeproj/Console.h; sourceTree = SOURCE_ROOT; };
+		3AE6F21713EC55CA00C56C5E /* Console.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Console.m; path = logician.xcodeproj/Console.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +96,12 @@
 			isa = PBXGroup;
 			children = (
 				3A41F6E413EAA81700D9CF98 /* main.m */,
+				3AE6F21613EC55CA00C56C5E /* Console.h */,
+				3AE6F21713EC55CA00C56C5E /* Console.m */,
+				3A41F70913EB127200D9CF98 /* Expressing */,
+				3A479C6F13EB231D002FA5D4 /* Matching */,
+				3A41F6F413EAF2C700D9CF98 /* Fitch.h */,
+				3A41F6F513EAF2C700D9CF98 /* Fitch.m */,
 				3A41F6E813EAA81700D9CF98 /* logician.1 */,
 				3A41F6E613EAA81700D9CF98 /* Supporting Files */,
 			);
@@ -84,6 +114,32 @@
 				3A41F6E713EAA81700D9CF98 /* logician-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3A41F70913EB127200D9CF98 /* Expressing */ = {
+			isa = PBXGroup;
+			children = (
+				3A41F6EE13EAE45500D9CF98 /* Expression.h */,
+				3A41F6EF13EAE45500D9CF98 /* Expression.m */,
+				3A41F70213EB117100D9CF98 /* Variable.h */,
+				3A41F70313EB117100D9CF98 /* Variable.m */,
+				3A479C7313EB2468002FA5D4 /* Placeholder.h */,
+				3A479C7413EB2468002FA5D4 /* Placeholder.m */,
+				3A41F70613EB126100D9CF98 /* Constant.h */,
+				3A41F70713EB126100D9CF98 /* Constant.m */,
+				3A41F6F113EAE77F00D9CF98 /* Sentence.h */,
+				3A41F6F213EAE77F00D9CF98 /* Sentence.m */,
+			);
+			name = Expressing;
+			sourceTree = "<group>";
+		};
+		3A479C6F13EB231D002FA5D4 /* Matching */ = {
+			isa = PBXGroup;
+			children = (
+				3A41F6F713EB046100D9CF98 /* Rule.h */,
+				3A41F6F813EB046100D9CF98 /* Rule.m */,
+			);
+			name = Matching;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,6 +193,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A41F6E513EAA81700D9CF98 /* main.m in Sources */,
+				3A41F6F013EAE45500D9CF98 /* Expression.m in Sources */,
+				3A41F6F313EAE77F00D9CF98 /* Sentence.m in Sources */,
+				3A41F6F613EAF2C700D9CF98 /* Fitch.m in Sources */,
+				3A41F6F913EB046100D9CF98 /* Rule.m in Sources */,
+				3A41F70413EB117100D9CF98 /* Variable.m in Sources */,
+				3A41F70813EB126100D9CF98 /* Constant.m in Sources */,
+				3A479C7513EB2468002FA5D4 /* Placeholder.m in Sources */,
+				3AE6F21813EC55CA00C56C5E /* Console.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,6 +248,27 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "logician/logician-Prefix.pch";
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
+				GCC_WARN_INHIBIT_ALL_WARNINGS = NO;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = YES;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
+				GCC_WARN_PEDANTIC = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -197,6 +282,27 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "logician/logician-Prefix.pch";
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
+				GCC_WARN_INHIBIT_ALL_WARNINGS = NO;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = YES;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
+				GCC_WARN_PEDANTIC = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -220,6 +326,7 @@
 				3A41F6ED13EAA81700D9CF98 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
