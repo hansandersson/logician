@@ -3,12 +3,13 @@
 //  logician
 //
 //  Created by Hans Andersson on 11/08/04.
-//  Copyright 2011 Ultramentem & Vigorware. All rights reserved.
+//  Copyright 2011 Hans Andersson. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import "Parser.h"
 #import "Rule.h"
+#import "Fitch.h"
 
 void parseLine(NSString *line, NSMutableSet *premises, NSMutableSet *conclusions);
 
@@ -57,28 +58,7 @@ int main (const int argc, const char *argv[])
 		parseLine(inputString, premises, conclusions);
 	}
 	
-	NSSet *rules = [premises filteredSetUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings)
-														{
-															(void) bindings;
-															return [evaluatedObject isKindOfClass:[Rule class]];
-														}
-														]
-					];
-	
-	NSSet *facts = [premises filteredSetUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings)
-														{
-															(void) bindings;
-															return [evaluatedObject isKindOfClass:[Expression class]];
-														}
-														]
-					];
-	
-	NSMutableSet *deductions = [NSMutableSet set];
-	for (Rule *rule in rules)
-	{
-		[deductions unionSet:[rule deductionsWithGivens:facts]];
-	}
-	
+	NSSet *deductions = [[[[Fitch alloc] initWithPremises:premises] autorelease] deductions];
 	for (Expression *deduction in deductions)
 	{
 		printf(", %s\n", [[deduction description] cStringUsingEncoding:NSUTF8StringEncoding]);
@@ -100,7 +80,19 @@ void parseLine(NSString *line, NSMutableSet *premises, NSMutableSet *conclusions
 		
 		if ([directive isEqualToString:@"."])
 		{
-			[premises unionSet:[lineParser expressionsWithString:statement]];
+			NSArray *components = [statement componentsSeparatedByString:@":"];
+			
+			if ([components count] == 1)
+			{
+				[premises unionSet:[lineParser expressionsWithString:statement]];
+			}
+			else
+			{
+				Rule *rule = [[Rule alloc] initWithSubstrates:[lineParser expressionsWithString:[components objectAtIndex:0]] substitions:[lineParser expressionsWithString:[components objectAtIndex:1]]];
+				NSLog(@"%@", rule);
+				[premises addObject:rule];
+				[rule release];
+			}
 		}
 		else if ([directive isEqualToString:@"?"])
 		{

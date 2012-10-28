@@ -3,7 +3,7 @@
 //  logician
 //
 //  Created by Hans Andersson on 11/08/04.
-//  Copyright 2011 Ultramentem & Vigorware. All rights reserved.
+//  Copyright 2011 Hans Andersson. All rights reserved.
 //
 
 #import "Rule.h"
@@ -49,78 +49,77 @@
 
 + (NSSet *)deductionsWithGivens:(NSSet *)givens substrates:(NSSet *)substrates substitutions:(NSSet *)substitutions constraints:(NSMutableDictionary *)constraints
 {
-	/*if ([conclusion isBound])
+	NSMutableSet *substratesUnsatisfied = [NSMutableSet setWithCapacity:[substrates count]];
+	for (Expression *substrate in substrates)
 	{
-		BOOL isConclusionJustified = YES;
-		for (Expression *premise in premises)
+		NSSet *satisfactions = [givens filteredSetUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(Expression *evaluatedGiven, NSDictionary *bindings) {
+			(void) bindings;
+			return [[evaluatedGiven description] isEqualToString:[substrate description]];
+		}]];
+		
+		if ([satisfactions count] == 0)
 		{
-			if (![premise isBound])
-			{
-				isConclusionJustified = NO;
-				break;
-			}
+			[substratesUnsatisfied addObject:substrate];
 		}
-		if (isConclusionJustified)
-		{
-			return [NSMutableSet setWithObject:conclusion];
-		}
-	}*/
+	}
+	
+	NSSet *substratesImpossible = [substratesUnsatisfied filteredSetUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(Expression *evaluatedSubstrate, NSDictionary *bindings) {
+		(void) bindings;
+		return [evaluatedSubstrate isBound];
+	}]];
+	
+	if ([substratesImpossible count] > 0)
+	{
+		return [NSSet set];
+	}
+	else if ([substratesUnsatisfied count] == 0)
+	{
+		return substitutions;
+	}
 	
 	NSMutableSet *deductions = [NSMutableSet set];
 	
-	if ([substitutions count] == 0 || [substrates count] == 0)
-	{
-		return deductions;
-	}
-	
-	for (Expression *substrate in substrates)
+	for (Expression *substrateUnsatisfied in substratesUnsatisfied)
 	{
 		for (Expression *given in givens)
 		{
 			NSMutableDictionary *constraintsModified = [[constraints mutableCopy] autorelease];
-			NSDictionary *constraintsAddition = [substrate dictionaryMappingTo:given];
-			BOOL areConstraintsConsistent = !!constraintsAddition;
+			NSDictionary *constraintsAddition = [substrateUnsatisfied dictionaryMappingTo:given];
+			BOOL areConstraintsConsistent = !!constraintsAddition && [constraintsAddition count] > 0;
 			
-			for (id key in [constraintsAddition allKeys])
+			if (areConstraintsConsistent)
 			{
-				if (![constraintsModified objectForKey:key])
+				for (id key in [constraintsAddition allKeys])
 				{
-					[constraintsModified setObject:[constraintsAddition objectForKey:key] forKey:key];
-				}
-				else if ([constraintsModified objectForKey:key] != [constraintsAddition objectForKey:key])
-				{
-					areConstraintsConsistent = NO;
-					break;
+					if (![constraintsModified objectForKey:key])
+					{
+						[constraintsModified setObject:[constraintsAddition objectForKey:key] forKey:key];
+					}
+					else if ([constraintsModified objectForKey:key] != [constraintsAddition objectForKey:key])
+					{
+						areConstraintsConsistent = NO;
+						break;
+					}
 				}
 			}
 			
 			if (areConstraintsConsistent)
 			{
-				NSMutableSet *substratesModified = [NSMutableSet setWithCapacity:[substrates count]];
-				for (Expression *substrateModifiable in substrates)
+				NSMutableSet *substratesConstrained = [NSMutableSet setWithCapacity:[substratesUnsatisfied count]];
+				for (Expression *substrate in substratesUnsatisfied)
 				{
-					Expression *substrateModified = [substrateModifiable expressionMappedFrom:constraintsModified];
-					if (![substrateModified isBound])
-					{
-						[substratesModified addObject:[substrateModifiable expressionMappedFrom:constraintsModified]];
-					}
+					Expression *substrateConstrained = [substrate expressionMappedFrom:constraintsModified];
+					[substratesConstrained addObject:substrateConstrained];
 				}
 				
-				NSMutableSet *substitutionsModified = [NSMutableSet setWithCapacity:[substitutions count]];
-				for (Expression *substitutionModifiable in substitutions)
+				NSMutableSet *substitutionsConstrained = [NSMutableSet setWithCapacity:[substitutions count]];
+				for (Expression *substitution in substitutions)
 				{
-					Expression *substitutionModified = [substitutionModifiable expressionMappedFrom:constraintsModified];
-					if (![substitutionModified isBound])
-					{
-						[substitutionsModified addObject:substitutionModified];
-					}
-					else
-					{
-						[deductions addObject:substitutionModified];
-					}
+					Expression *substitutionConstrained = [substitution expressionMappedFrom:constraintsModified];
+					[substitutionsConstrained addObject:substitutionConstrained];
 				}
 				
-				[deductions unionSet:[self deductionsWithGivens:givens substrates:substratesModified substitutions:substitutionsModified constraints:constraintsModified]];
+				[deductions unionSet:[self deductionsWithGivens:givens substrates:substratesConstrained substitutions:substitutionsConstrained constraints:constraintsModified]];
 			}
 		}
 	}

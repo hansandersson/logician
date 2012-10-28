@@ -3,7 +3,7 @@
 //  logician
 //
 //  Created by Hans Andersson on 11/08/05.
-//  Copyright 2011 Ultramentem & Vigorware. All rights reserved.
+//  Copyright 2011 Hans Andersson. All rights reserved.
 //
 
 #import "Parser.h"
@@ -137,7 +137,7 @@
 		case LogicianParserInputModeVariable:
 			if (![variablesByStringValue objectForKey:workingString])
 			{
-				[variablesByStringValue setObject:[[[Variable alloc] initWithStringValue:[NSString stringWithFormat:@"%i", [variablesByStringValue count]]] autorelease] forKey:workingString];
+				[variablesByStringValue setObject:[[[Variable alloc] initWithStringValue:[[NSNumber numberWithUnsignedInteger:[variablesByStringValue count]] stringValue]] autorelease] forKey:workingString];
 			}
 			
 			return [variablesByStringValue objectForKey:workingString];

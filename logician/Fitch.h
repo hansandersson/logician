@@ -3,7 +3,7 @@
 //  logician
 //
 //  Created by Hans Andersson on 11/08/04.
-//  Copyright 2011 Ultramentem & Vigorware. All rights reserved.
+//  Copyright 2011 Hans Andersson. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -12,10 +12,11 @@
 
 @interface Fitch : NSObject
 {
-	NSSet *rules;
+	NSMutableDictionary *premisesByDescription;
 }
 
-- (id)initWithRules:(NSSet *)initRules;
+- (id)initWithPremises:(NSSet *)initPremises;
+- (NSSet *)deductions;
 - (NSArray *)proveConclusion:(Expression *)conclusion givenAssumptions:(NSSet *)assumptions;
 
 @end

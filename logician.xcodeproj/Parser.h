@@ -3,7 +3,7 @@
 //  logician
 //
 //  Created by Hans Andersson on 11/08/05.
-//  Copyright 2011 Ultramentem & Vigorware. All rights reserved.
+//  Copyright 2011 Hans Andersson. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
